@@ -88,7 +88,7 @@ def evaluate_player_actions(player, hand, dealer_upcard):
 
         hand_total = hand.get_formatted_hand_total()
 
-        if ('A' not in hand_total or 'T' not in hand_total):
+        if ('A' not in hand_total and 'T' not in hand_total):
             if (int(hand_total) > 21):
                 hand.bust = True
                 continue
@@ -134,32 +134,20 @@ def play_out_hand():
         for hand_index in range(len(player.hands)):
             hand = player.hands[hand_index]
             dealer_upcard = DEALER.hands[0].cards[0].value
+            logger.log_hands(0, hand, DEALER.hands[0],0)
 
             evaluate_player_actions(player, hand, dealer_upcard)
 
     #After all players are done, DEALER plays hand        
     evaluate_dealer_actions()
 
-def lookup_hand_totals_map(hand):
-    return HAND_TOTALS[hand]
-
 def compare_formatted_hand_values(dealer_hand, player_hand):
     """
     returns "DEALER", "PLAYER", or "DRAW" for tie
     """
     #The assumption is that all player an dealer blackjack/busts are evaluated before this function is run
-    formatted_dealer_hand = dealer_hand.get_formatted_hand_total()
-    formatted_player_hand = player_hand.get_formatted_hand_total()
-
-    if 'A' in formatted_dealer_hand:
-        dealer_total = lookup_hand_totals_map(formatted_dealer_hand)
-    else:
-        dealer_total = int(formatted_dealer_hand)
-
-    if 'A' in formatted_player_hand:
-        player_total = lookup_hand_totals_map(formatted_player_hand)
-    else:
-        player_total = int(formatted_player_hand)
+    
+    dealer_total, player_total = get_integer_totals(dealer_hand, player_hand)
         
     if dealer_total > player_total:
         return "DEALER"

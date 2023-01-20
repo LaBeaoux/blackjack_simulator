@@ -40,7 +40,7 @@ def get_dealer_hits_soft_17_hand_total(dealer_hands):
     return hand_total, soft_amount
 
 def dealer_hits_soft_17_ruleset_action(hand_total, soft_hand):
-    if hand_total < 16:
+    if hand_total <= 16:
         return HIT
     elif hand_total  == 17:
         if soft_hand:
