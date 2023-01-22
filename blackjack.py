@@ -19,9 +19,9 @@ logger = Logger()
 def create_shoe(decks:int=1):
     shoe = []
     for i in range(decks):
-        for suit in SUITS:
+        for j in range(len(SUITS)):
             for value in VALUES:
-                card = Card(value, suit)
+                card = Card(value)
                 shoe.append(card)
     return shoe
 

@@ -2,9 +2,8 @@ from blackkjack_globals import *
 
 
 class Card():
-    def __init__(self, value, suit):
+    def __init__(self, value):
         self.value = value
-        self.suit = suit
     
     def get_value(self):
         if self.value == 'A':
