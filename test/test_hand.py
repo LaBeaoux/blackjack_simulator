@@ -19,7 +19,7 @@ class TestFormattedHandTotal(unittest.TestCase):
 
     def test_get_formatted_hand_total(self):
         test_values = [
-            {'cards': ['J', 'A'],  'expected': 'A11', 'assert': 'equal'},
+            {'cards': ['J', 'A'],  'expected': 'A10', 'assert': 'equal'},
             {'cards': ['2', '3'],  'expected': '5',   'assert': 'equal'},
             {'cards': ['A', 'A'],  'expected': 'AA',  'assert': 'equal'},
             {'cards': ['5', '5'],  'expected': '55',  'assert': 'equal'},
@@ -39,14 +39,15 @@ class TestFormattedHandTotal(unittest.TestCase):
             for card_value in case['cards']:
                 hand.cards.append(Card(card_value)) #Add cards to test_hand
             expected_value = case['expected']
+            actual = hand.get_formatted_hand_total()
 
             if case['assert'] == 'equal':
-                self.assertEqual(hand.get_formatted_hand_total(), expected_value, 
+                self.assertEqual(actual, expected_value, 
                              "formatted hand string not equal")
 
             elif case['assert'] == 'notEqual':
-                self.assertNotEqual(hand.get_formatted_hand_total(), expected_value, 
-                             "formatted hand string not equal")
+                self.assertNotEqual(actual, expected_value, 
+                             "formatted hand string equal")
 
 
 if __name__ == '__main__':

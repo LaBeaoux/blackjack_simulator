@@ -57,6 +57,11 @@ class Hand():
                 formatted_hand_total = values[0] + values[1]
             else:
                 formatted_hand_total = values[1] + values[0]
+            
+            #Convert face cards to 10
+            if formatted_hand_total[1] in ['K', 'Q', 'J']:
+                formatted_hand_total = 'A10'
+
         return formatted_hand_total
 
     def __evaluate_two_cards(self, values):
