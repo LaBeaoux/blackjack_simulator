@@ -24,13 +24,13 @@ class TestFormattedHandTotal(unittest.TestCase):
             {'cards': ['A', 'A'],  'expected': 'AA',  'assert': 'equal'},
             {'cards': ['5', '5'],  'expected': '55',  'assert': 'equal'},
             {'cards': ['7', 'A'],  'expected': 'A7',  'assert': 'equal'},
-            {'cards': ['J', '10'], 'expected': 'TT',  'assert': 'equal'},
+            {'cards': ['J', '10'], 'expected': '20',  'assert': 'equal'},
             {'cards': ['J', 'J'],  'expected': 'TT',  'assert': 'equal'},
             {'cards': ['2', '3', '4'], 'expected': '9', 'assert': 'equal'},
             {'cards': ['K', 'Q', 'J'], 'expected': '30', 'assert': 'equal'},
             {'cards': ['5', '5', '5'], 'expected': '15', 'assert': 'equal'},
             {'cards': ['10', '5', '2', 'J'], 'expected': '15', 'assert': 'notEqual'},
-            {'cards': ['2', '3', '4', '6', 'A'], 'expected': '19', 'assert': 'equal'},
+            {'cards': ['2', '3', '4', '6', 'A'], 'expected': '16', 'assert': 'equal'},
             ]
 
         #build test hand
