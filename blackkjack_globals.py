@@ -9,7 +9,7 @@ SURRENDER = 5
 HAND_TOTALS = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
                '10': 10, '11': 11, '12': 12, '13': 13, '14': 14, '15': 15, '16': 16,
                '17': 17, '18': 18, '19': 19, '20': 20, '21': 21,
-               'A2': 13, 'A3': 14, 'A4': 15, 'A6': 17, 'A7': 18, 'A8': 19, 'A9': 20, 'A10': 21,
+               'A2': 13, 'A3': 14, 'A4': 15, 'A5': 16, 'A6': 17, 'A7': 18, 'A8': 19, 'A9': 20, 'A10': 21,
                'A11': 12, 'A12': 13, 'A13': 14, 'A14': 15, 'A15': 16, 'A16': 16, 
                'A17': 18, 'A18': 19, 'A19': 20, 'A20': 21,
                'AA': 2, '22': 4, '33': 6, '44': 8, '55': 10, '66': 12, '77': 14,
@@ -53,12 +53,12 @@ def get_integer_totals(dealer_hand, player_hand):
     formatted_dealer_hand = dealer_hand.get_formatted_hand_total()
     formatted_player_hand = player_hand.get_formatted_hand_total()
 
-    if 'A' in formatted_dealer_hand:
+    if 'A' in formatted_dealer_hand or 'T' in formatted_dealer_hand:
         dealer_total = lookup_hand_totals_map(formatted_dealer_hand)
     else:
         dealer_total = int(formatted_dealer_hand)
 
-    if 'A' in formatted_player_hand:
+    if 'A' in formatted_player_hand or 'T' in formatted_player_hand:
         player_total = lookup_hand_totals_map(formatted_player_hand)
     else:
         player_total = int(formatted_player_hand)

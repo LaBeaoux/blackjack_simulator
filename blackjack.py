@@ -16,7 +16,7 @@ PLAYERS = []
 SHOE = []
 logger = Logger()
 
-def create_shoe(decks:int=1):
+def create_shoe(decks:int=10):
     shoe = []
     for i in range(decks):
         for j in range(len(SUITS)):
@@ -29,7 +29,7 @@ def PLAYERS_AT_TABLE(player_count):
     for player in range(player_count):
         PLAYERS.append(Player(ruleset=std_dhs17.Standard_Dealer_Hits_Soft_17_Ruleset(),
                               chips=1000,
-                              min_wager=15))
+                              min_wager=50))
 
 def enough_cards_in_shoe():
     if len(SHOE) > (len(PLAYERS) * 4):
@@ -134,7 +134,7 @@ def play_out_hand():
         for hand_index in range(len(player.hands)):
             hand = player.hands[hand_index]
             dealer_upcard = DEALER.hands[0].cards[0].value
-            logger.log_hands(0, hand, DEALER.hands[0],0)
+            # logger.log_hands(0, hand, DEALER.hands[0],0)
 
             evaluate_player_actions(player, hand, dealer_upcard)
 
@@ -222,7 +222,7 @@ def clear_cards_from_table():
 
 def prepare_the_shoe():
     global SHOE
-    SHOE = create_shoe(decks=1)
+    SHOE = create_shoe(decks=10)
     r = random.SystemRandom()
     r.shuffle(SHOE)
 

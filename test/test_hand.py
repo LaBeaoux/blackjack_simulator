@@ -26,6 +26,7 @@ class TestFormattedHandTotal(unittest.TestCase):
             {'cards': ['7', 'A'],  'expected': 'A7',  'assert': 'equal'},
             {'cards': ['J', '10'], 'expected': '20',  'assert': 'equal'},
             {'cards': ['J', 'J'],  'expected': 'TT',  'assert': 'equal'},
+            {'cards': ['2', 'A', 'A'],  'expected': 'A3',  'assert': 'equal'},
             {'cards': ['2', '3', '4'], 'expected': '9', 'assert': 'equal'},
             {'cards': ['K', 'Q', 'J'], 'expected': '30', 'assert': 'equal'},
             {'cards': ['5', '5', '5'], 'expected': '15', 'assert': 'equal'},

@@ -83,11 +83,11 @@ class Hand():
 
         for index, value in enumerate(values):
             if value == 'A':
-                a_index = index
-            elif a_index != None:
-                if value == 'A':
+                if a_index != None:
                     #If multiple Aces are in deck and 1st Ace has been found, since both can't be high all others MUST be 1's
                     values[index] = '1'
+                else:
+                    a_index = index
 
         formatted_hand_total += values.pop(a_index) #Get the Ace 'A' first
         
