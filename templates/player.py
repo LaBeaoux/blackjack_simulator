@@ -23,7 +23,7 @@ class Player():
             hand.sum_first_deal()
 
     def clean_hand(self):
-        self.hands = None
+        self.hands = []
 
     def __reformat_dealer_hand(self, dealer_upcard):
         tens = ['J', 'Q', 'K']

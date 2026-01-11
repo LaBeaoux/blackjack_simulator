@@ -122,38 +122,59 @@ class Hand():
         This method sets blackjack or bust parameters for the hand.
         """
         values = [card.value for card in self.cards]
+        n_cards = len(values)
         if 'A' in values:
             #Check for blackjack
-            sum = 0
+            total = 0
             multiple_aces = False
             for index in range(len(values)):
                 if values[index] != 'A':
-                    sum += int(CARD_VALUES[values[index]])
-                elif values[index] == 'A':
-                    if multiple_aces:
-                        #Make every Ace other than the first have a '1' value
+                    total += int(CARD_VALUES[values[index]])
+                else:
+                    # First ace will be counted later as either 1 or 11; any subsequent aces must be 1
+                    if not multiple_aces:
+                        multiple_aces = True
+                    else:
                         values[index] = '1'
 
-            if sum == 10:
-                #Accounting for Ace==11
+            # For blackjack, only a two-card hand counts as Blackjack (Ace + 10)
+            if n_cards == 2 and total == 10:
+                # Accounting for Ace==11
                 self.blackjack = True
-            elif sum == 20:
-                #Accounting for Ace==1
-                self.blackjack = True
-            elif sum > 21:
+            elif total > 21:
                 self.bust = True
         else:
-            sum = 0 
+            total = 0
             for value in values:
-                sum += int(CARD_VALUES[value])
-            if sum == 21:
-                self.blackjack = True
-            elif sum > 21:
+                total += int(CARD_VALUES[value])
+            # Only two-card totals of 21 are blackjack
+            if total > 21:
                 self.bust = True
 
     def evaluate_dealer_hand(self):
-        sum = 0
+        # Return the best dealer total treating Aces as 1 or 11 appropriately
+        total = 0
+        aces = 0
         for card in self.cards:
-            sum += card.get_value
+            val = card.get_value()
+            if isinstance(val, list):
+                # Ace: count as 1 for now and try to upgrade later
+                aces += 1
+                total += 1
+            else:
+                total += val
+
+        # Try to upgrade some aces from 1 to 11 (adding 10) while staying <=21
+        for _ in range(aces):
+            if total + 10 <= 21:
+                total += 10
+
+        # Set flags
+        if len(self.cards) == 2 and total == 21:
+            self.blackjack = True
+        elif total > 21:
+            self.bust = True
+
+        return total
 
 

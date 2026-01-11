@@ -40,8 +40,9 @@ class TestDHS17RulesetAction(unittest.TestCase):
             {'cards': ['5', '5', '5'], 'expected': HIT},
             {'cards': ['10', '5', '2', 'J'], 'expected': STAY},
             {'cards': ['2', '3', '4', '6', 'A'], 'expected': HIT},
-            ]
-        
+            {'cards': ['6', 'A', '5'], 'expected': HIT},
+        ]
+
         #Create Hand objects to from test values to pass to ruleset action
         for case in test_values:
             hand = Hand()
